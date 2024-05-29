@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.3.0</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <groupId>br.com.leaf</groupId>
+    <artifactId>comprafacil</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>comprafacil</name>
+
+    <description>
+        O "Compra Fácil" é um software inovador de gerenciamento de carrinho de compras e gestão, projetado para
+        oferecer uma experiência de compra eficiente e intuitiva. Este sistema é ideal para lojas online, supermercados
+        e qualquer estabelecimento que necessite de uma solução robusta para facilitar o processo de compras dos seus
+        clientes.
+
+        Objetivo:
+        O objetivo do "Compra Fácil" é simplificar o processo de compras para os clientes, ao mesmo tempo em que oferece
+        aos gestores ferramentas poderosas para controlar e otimizar as operações de vendas e estoque.
+
+        Funcionalidades Principais:
+
+        Funcionalidades Principais
+        1. Login e Registro de Usuário
+        Descrição: Os usuários devem ser capazes de se cadastrar e fazer login no sistema usando as ferramentas do
+        Spring Security para autenticação e autorização.
+        Funcionalidades:
+        • Registro de Usuário:
+        o Formulário de registro contendo campos como nome, email, senha e confirmação de senha.
+        o Validação dos dados do usuário no lado do cliente e no servidor.
+        o Armazenamento seguro da senha usando hashing.
+        Login de Usuário:
+        o api de login com variaveis para email e senha.
+        o Autenticação de usuário usando Spring Security.
+        o Gestão de sessões de usuário. (utilizar o token spring security)
+        • Autorização:
+        o Controle de acesso a diferentes partes do sistema com base nas permissões do usuário (usuário comum ,
+        administrador).
+        o Middleware de verificação de permissões antes de permitir o acesso a rotas protegidas.
+
+        2. Gestão de Itens
+        Descrição: Os usuários administradores terão acesso a uma tela de gestão de itens, permitindo o controle do
+        cadastro e manutenção de itens, bem como seus preços.
+        Funcionalidades:
+        • Listagem de Itens: (Todos)
+        o Exibição de uma tabela/lista de itens cadastrados com informações básicas (nome, descrição, preço ).
+        • Cadastro de Novo Item: (Administrador)
+        o api para adicionar um novo item, incluindo campos como nome, descrição, categoria, preço e url da imagem e
+        quantidade.
+        o Validação para saber se o usuário tem permissão de fazer essa função.
+        • Edição de Item: (Administrador)
+        o Opção para editar informações de um item existente.
+        o Atualização dos dados no banco de dados.
+        o Validação para saber se o usuário tem permissão de fazer essa função.
+        • Remoção de Item: (Administrador)
+        o Função para remover itens do sistema.
+        o Validação para saber se o usuário tem permissão de fazer essa função.
+
+        3. Carrinho de Compras
+        Descrição: Os usuários podem adicionar e remover itens do carrinho de compras. O carrinho de compras deve ser
+        persistente e associado ao usuário logado.
+        Funcionalidades: (Usuário Comum)
+        • Adição de Itens ao Carrinho: (Usuário Comum)
+        o Adicionar um item e quantidade a um carrinho.
+        • Remoção de Itens do Carrinho: (Usuário Comum)
+        o Remoção de um item e de sua quantidade.
+        • Visualização do Carrinho: (Usuário Comum)
+        o Consulta que lista de itens no carrinho do cliente.
+        4. Pagamentos (Simulação)
+        Descrição: Implementar um serviço que vai chamar uma api de pagamento passando um carrinho.
+        Funcionalidades:
+        • Resumo do Carrinho:
+        o Listar todos os itens do carrinho .
+        o Colocar no final um resumo de quantidade de itens e soma de valores.
+        • Simulação de Transação:
+        o Envia para um end point mockado lista de itens ,custo total e o tipo de pagamento(Cartao, Boleto,Debito,Pix).
+        o O end point mockado vai sempre retornada pagamento realizado com sucesso.
+    </description>
+
+    <developers>
+        <developer>
+            <id>001</id>
+            <name>Rafael Teixeira</name>
+            <email>rafaelteixeirarnnt@gmail.com</email>
+        </developer>
+    </developers>
+
+    <properties>
+        <java.version>21</java.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
