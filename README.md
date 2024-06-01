@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-  <img src="src/main/resources/images/img.png" style="width: 50px; height: auto;" alt="Símbolo de em construção"/> <br />
+  <img src="images/img.png" style="width: 50px; height: auto;" alt="Símbolo de em construção"/> <br />
 <span style="font-family: Arial, sans-serif; color: #FF0000;">Em construção</span>
 </p>
 

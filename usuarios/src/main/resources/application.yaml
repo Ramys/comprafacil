@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: usuarios
+
+  config:
+    import: configserver:http://localhost:8888
+
+  cloud:
+    config:
+      name: ${spring.application.name}
+
+  docker:
+    compose:
+      file: ./usuarios/docker-compose.yaml
+
+  datasource:
+    url:
+    driver-class-name:
+    username:
+    password:
+    hikari:
+      schema: ${spring.application.name}
+
+server:
+  port: 8081
