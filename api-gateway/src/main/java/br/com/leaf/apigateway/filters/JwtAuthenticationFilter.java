@@ -35,9 +35,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         // Implemente a extração das informações do usuário a partir do token JWT aqui
         // Exemplo:
         String username = "extracted-username"; // Extraia o nome de usuário do token
-        return User.withUsername(username)
-                .password("")
-                .authorities("ROLE_USER").build();
+//        return User.withUsername(username)
+//                .password("")
+//                .authorities("ROLE_USER").build();
+
+        return User.builder().build();
     }
 
     private String extractJwtFromRequest(HttpServletRequest request) {
