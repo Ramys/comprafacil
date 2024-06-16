@@ -10,16 +10,10 @@ spring:
         locator:
           enabled: true
       routes:
-        - id: usuarios
-          uri: localhost:8081
-          predicates:
-            - Path=/usuarios/**
-          filters:
-            - StripPrefix=1
         - id: usuario_service_swagger_ui
-          uri: lb://USUARIOS
+          uri: http://localhost:8081/swagger-ui/index.html
           predicates:
-            - Path=/usuarios/swagger-ui.html
+            - Path=/usuarios/swagger-ui/index.html
           filters:
             - StripPrefix=1
         - id: usuario_service_api_docs
@@ -27,7 +21,7 @@ spring:
           predicates:
             - Path=/usuarios/v3/api-docs
           filters:
-            - StripPrefix=1
+              - StripPrefix=1
 
 eureka:
   client:
