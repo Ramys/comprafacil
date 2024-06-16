@@ -17,15 +17,15 @@ spring:
           filters:
             - StripPrefix=1
         - id: usuario_service_swagger_ui
-          uri: http://localhost:8081/swagger-ui.html
+          uri: lb://USUARIOS
           predicates:
-            - Path=/usuario/swagger-ui.html
+            - Path=/usuarios/swagger-ui.html
           filters:
             - StripPrefix=1
         - id: usuario_service_api_docs
-          uri: http://localhost:8081/v3/api-docs
+          uri: lb://USUARIOS
           predicates:
-            - Path=/usuario/v3/api-docs
+            - Path=/usuarios/v3/api-docs
           filters:
             - StripPrefix=1
 
