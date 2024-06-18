@@ -9,6 +9,7 @@ spring:
       discovery:
         locator:
           enabled: true
+          lowerCaseServiceId: true
       routes:
         - id: usuario_service_swagger_ui
           uri: http://localhost:8081/swagger-ui/index.html
@@ -22,6 +23,12 @@ spring:
             - Path=/usuarios/v3/api-docs
           filters:
               - StripPrefix=1
+        - id: teste
+          uri: lb://USUARIOS/cadastro-usuario/teste
+          predicates:
+            - Path=/usuarios/cadastro-usuario/teste
+          filters:
+            - StripPrefix=1
 
 eureka:
   client:

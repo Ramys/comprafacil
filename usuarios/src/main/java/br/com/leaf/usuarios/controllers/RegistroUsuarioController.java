@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -62,6 +63,13 @@ public class RegistroUsuarioController {
     @Operation(summary = "O serviço de autorização controla o acesso dos usuários a diferentes partes e funcionalidades" +
             " do sistema, com base em suas permissões e roles (ex.: usuário comum, administrador).")
     public String autorizar() {
+        return "oi";
+    }
+
+    @GetMapping("/teste")
+    @Operation(summary = "O serviço de autorização controla o acesso dos usuários a diferentes partes e funcionalidades" +
+            " do sistema, com base em suas permissões e roles (ex.: usuário comum, administrador).")
+    public String teste() {
         return "oi";
     }
 
