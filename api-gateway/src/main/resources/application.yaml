@@ -2,6 +2,8 @@ server:
   port: 8080
 
 spring:
+  main:
+    allow-bean-definition-overriding: true
   application:
     name: api-gateway
   cloud:
@@ -11,28 +13,14 @@ spring:
           enabled: true
           lowerCaseServiceId: true
       routes:
-        - id: usuario_service_swagger_ui
-          uri: http://localhost:8081/swagger-ui/index.html
-          predicates:
-            - Path=/usuarios/swagger-ui/index.html
-          filters:
-            - StripPrefix=1
-        - id: usuario_service_api_docs
+        - id: usuarios-service
           uri: lb://USUARIOS
           predicates:
-            - Path=/usuarios/v3/api-docs
-          filters:
-              - StripPrefix=1
-        - id: teste
-          uri: lb://USUARIOS/cadastro-usuario/teste
-          predicates:
-            - Path=/usuarios/cadastro-usuario/teste
-          filters:
-            - StripPrefix=1
+            - Path=/usuarios/**
 
 eureka:
   client:
-    service-url:
+    serviceUrl:
       defaultZone: http://localhost:8761/eureka/
   instance:
     prefer-ip-address: true

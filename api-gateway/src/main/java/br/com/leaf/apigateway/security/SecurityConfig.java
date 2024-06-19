@@ -12,9 +12,13 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+        http
+                .csrf().disable()
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/usuarios/swagger-ui/index.html", "/usuarios/v3/api-docs", "/usuarios/swagger-ui/**").permitAll()
+                        .requestMatchers("/usuarios/swagger-ui/index.html", "/usuarios/v3/api-docs").permitAll()
+                        .requestMatchers("/swagger-ui/index.html", "/v3/api-docs").permitAll()
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                        .requestMatchers("/usuarios/**").permitAll()
                         .anyRequest().permitAll());
         return http.build();
     }
