@@ -19,6 +19,9 @@ spring:
           uri: lb://USUARIOS
           predicates:
             - Path=/usuarios/**
+  security:
+    user:
+      password: $2a$12$vTZcFUVNN02ptlcCq0jDGOemMNsxy4jbskE7cnuxS56AUOzlf4x4m
 
 eureka:
   client:
