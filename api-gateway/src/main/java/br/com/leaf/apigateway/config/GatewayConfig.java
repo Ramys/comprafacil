@@ -13,7 +13,7 @@ public class GatewayConfig {
     @Bean
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
-                .route("usuarios", r -> r.path("/usuarios/")
+                .route("usuarios", r -> r.path("/usuarios/**")
                         .uri("lb://USUARIOS"))
                 .build();
     }

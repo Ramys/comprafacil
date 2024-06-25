@@ -2,8 +2,6 @@ server:
   port: 8080
 
 spring:
-  autoconfigure:
-    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
   main:
     allow-bean-definition-overriding: true
   application:
@@ -19,9 +17,6 @@ spring:
           uri: lb://USUARIOS
           predicates:
             - Path=/usuarios/**
-  security:
-    user:
-      password: $2a$12$vTZcFUVNN02ptlcCq0jDGOemMNsxy4jbskE7cnuxS56AUOzlf4x4m
 
 eureka:
   client:
@@ -29,7 +24,3 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
   instance:
     prefer-ip-address: true
-
-jwt:
-  secret: teste
-  expiration: 3600
