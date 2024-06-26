@@ -26,8 +26,8 @@ spring:
 server:
   port: 0
 
-springdoc:
-  swagger-ui:
-    path: /swagger-ui.html
-  api-docs:
-    path: /v3/api-docs
+management:
+  endpoint:
+    enabled-by-default: false
+    info:
+      enabled: true
