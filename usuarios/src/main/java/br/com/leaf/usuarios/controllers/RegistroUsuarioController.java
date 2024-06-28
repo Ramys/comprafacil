@@ -1,6 +1,7 @@
 package br.com.leaf.usuarios.controllers;
 
 import br.com.leaf.usuarios.services.UsuariosServices;
+import br.com.leaf.usuarios.vos.LoginVO;
 import br.com.leaf.usuarios.vos.RegistroVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.headers.Header;
@@ -55,8 +56,8 @@ public class RegistroUsuarioController {
     @Operation(summary = "O serviço de login autentica usuários existentes, " +
             "permitindo que acessem suas contas. Os usuários fornecem suas credenciais (email e senha), " +
             "que são verificadas pelo sistema.")
-    public String logar() {
-        return "oi";
+    public String logar(@Validated @RequestBody LoginVO vo) {
+        return this.service.logar(vo);
     }
 
     @PostMapping("/autorizar")
