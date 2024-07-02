@@ -1,6 +1,6 @@
 package br.com.leaf.usuarios.mappers;
 
-import br.com.leaf.usuarios.models.Usuarios;
+import br.com.leaf.usuarios.entity.Usuarios;
 import br.com.leaf.usuarios.vos.RegistroVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

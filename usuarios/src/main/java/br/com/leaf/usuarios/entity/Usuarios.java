@@ -1,4 +1,4 @@
-package br.com.leaf.usuarios.models;
+package br.com.leaf.usuarios.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
