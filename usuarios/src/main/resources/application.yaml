@@ -38,4 +38,5 @@ management:
     info:
       enabled: true
 
-
+jwt:
+  secret:
