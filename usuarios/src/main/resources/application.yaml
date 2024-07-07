@@ -25,6 +25,7 @@ spring:
 
 server:
   port: 0
+  forward-headers-strategy: framework
 
 springdoc:
   api-docs:
@@ -39,4 +40,4 @@ management:
       enabled: true
 
 jwt:
-  secret:
+  secret: 79063e8037fff16d297a1fe65136f1251126cddb2cc9870ecf8d653835538e85

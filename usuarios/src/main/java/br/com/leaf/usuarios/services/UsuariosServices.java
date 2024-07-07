@@ -4,6 +4,7 @@ import br.com.leaf.usuarios.enums.PerfisEnum;
 import br.com.leaf.usuarios.exceptions.NegocioException;
 import br.com.leaf.usuarios.mappers.UsuariosMapper;
 import br.com.leaf.usuarios.repositories.UsuariosRepository;
+import br.com.leaf.usuarios.security.JwtService;
 import br.com.leaf.usuarios.vos.LoginVO;
 import br.com.leaf.usuarios.vos.RegistroVO;
 import br.com.leaf.usuarios.vos.TokenResponseVO;
