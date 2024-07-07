@@ -6,7 +6,6 @@ import br.com.leaf.usuarios.security.JwtService;
 import br.com.leaf.usuarios.services.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -23,7 +22,7 @@ import static org.springframework.http.HttpMethod.POST;
 
 @Configuration
 @EnableWebSecurity
-public class AuthConfig {
+public class SecurityConfig {
 
     private static final String[] AUTH_WHITELIST = {
             "/v2/api-docs",
