@@ -1,11 +1,9 @@
 package br.com.leaf.usuarios.security;
 
-import br.com.leaf.usuarios.enums.PerfisEnum;
+import br.com.leaf.usuarios.entity.Usuarios;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import io.jsonwebtoken.io.Decoders;
-import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,11 +14,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
 import java.io.UnsupportedEncodingException;
-import java.security.Key;
 import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 @Slf4j
 @Component
@@ -38,7 +33,7 @@ public class JwtService {
             getDecodedJWT(token);
             return true;
         } catch (UnsupportedEncodingException e) {
-            log.warn("Invalid token! Msg: {}", e.getMessage());
+            log.warn("Token inválido! Mensagem: {}", e.getMessage());
             return false;
         }
     }
@@ -51,32 +46,19 @@ public class JwtService {
         return JWT.decode(token);
     }
 
-    public String generateToken(String email, PerfisEnum perfil, Long id) {
-        Map<String, Object> claims = new HashMap<>();
-//        claims.put("role", perfil);
-//
-//        if (perfil == PerfisEnum.CLIENTE) {
-//            claims.put("cartId", UUID.randomUUID().toString());
-//            claims.put("userId", id);
-//        }
-
-        return createToken(claims, email);
+    public String generateToken(Usuarios usuario) {
+        return createToken(usuario);
     }
 
-    private String createToken(Map<String, Object> claims, String email) {
+    private String createToken(Usuarios usuario) {
         final LocalDateTime localDateTime = this.dateTimeProvider.dateTime();
         final Date now = this.dateTimeProvider.toDate(localDateTime);
         return JWT.create()
-                .withSubject(email)
-//                .withArrayClaim("roles", roles.toArray(new String[roles.size()]))
+                .withSubject(usuario.getEmail())
+                .withArrayClaim("role", new String[] { usuario.getPerfil() })
                 .withIssuedAt(now)
-//                .withClaim("clientName", client.getName())
+                .withClaim("clientName", usuario.getNome())
                 .sign(Algorithm.HMAC256(SECRET));
-    }
-
-    private Key getSignKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(SECRET);
-        return Keys.hmacShaKeyFor(keyBytes);
     }
 
     public String getUsername(String token) throws UnsupportedEncodingException {

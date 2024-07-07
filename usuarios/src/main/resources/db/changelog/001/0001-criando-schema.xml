@@ -25,6 +25,9 @@
             <column name="tx_senha" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="tx_perfil" type="VARCHAR(3)">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
 </databaseChangeLog>

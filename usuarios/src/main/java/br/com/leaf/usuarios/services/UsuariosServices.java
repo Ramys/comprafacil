@@ -1,6 +1,5 @@
 package br.com.leaf.usuarios.services;
 
-import br.com.leaf.usuarios.enums.PerfisEnum;
 import br.com.leaf.usuarios.exceptions.NegocioException;
 import br.com.leaf.usuarios.mappers.UsuariosMapper;
 import br.com.leaf.usuarios.repositories.UsuariosRepository;
@@ -44,10 +43,10 @@ public class UsuariosServices {
         var usuario = this.repository.findByEmail(vo.email()).orElseThrow(() -> new NegocioException("Usuário não localizado"));
 
         if (this.passwordEncoder.matches(vo.senha(), usuario.getSenha())) {
-            var tokenJwt = this.service.generateToken(usuario.getEmail(), PerfisEnum.ADMIN, 1L);
+            var tokenJwt = this.service.generateToken(usuario);
             return new TokenResponseVO(tokenJwt);
         } else {
-            throw new NegocioException("Credenciais incorrtetas. Por favor informe novamente");
+            throw new NegocioException("Credenciais incorretas. Por favor informe novamente!");
         }
     }
 

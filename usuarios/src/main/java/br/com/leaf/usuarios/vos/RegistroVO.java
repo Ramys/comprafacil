@@ -1,5 +1,6 @@
 package br.com.leaf.usuarios.vos;
 
+import br.com.leaf.usuarios.enums.PerfisEnum;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -31,5 +32,8 @@ public class RegistroVO {
     @NotBlank(message = "Confirmação de senha é obrigatória")
     @Length(min = 4, max = 10, message = "A senha deve ter entre 4 e 10 caracteres")
     private String senhaConfirmacao;
+
+    @NotNull(message = "Perfil é obrigatório")
+    private PerfisEnum perfil;
 
 }

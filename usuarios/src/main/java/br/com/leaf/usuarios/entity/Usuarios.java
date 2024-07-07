@@ -36,4 +36,7 @@ public class Usuarios {
     @Column(name = "tx_senha", nullable = false)
     private String senha;
 
+    @Column(name = "tx_perfil", nullable = false)
+    private String perfil;
+
 }
