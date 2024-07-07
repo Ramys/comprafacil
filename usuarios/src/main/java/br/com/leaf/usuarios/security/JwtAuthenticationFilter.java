@@ -17,17 +17,19 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
+    private static final String AUTHORIZATION = "Authorization";
+    private static final String BEARER = "Bearer ";
     private final JwtService jwtService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
 
-        var header = request.getHeader("Authorization");
-        if (header != null && header.startsWith("Bearer ")) {
+        var header = request.getHeader(AUTHORIZATION);
+        if (header != null && header.startsWith(BEARER)) {
             var token = header.substring(7);
             if (this.jwtService.validateToken(token)) {
-                final Authentication auth = this.jwtService.getAuthentication(token);
+                var auth = this.jwtService.getAuthentication(token);
                 SecurityContextHolder.getContext().setAuthentication(auth);
             }
         }

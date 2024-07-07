@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -23,7 +24,7 @@ public class UsuariosServices {
     private final ValidacaoComponent component;
     private final UsuariosRepository repository;
     private final PasswordEncoder passwordEncoder;
-    private final JwtService jwtService;
+    private final JwtService service;
 
     public UUID registrarUsuario(RegistroVO registro) {
 
@@ -43,10 +44,19 @@ public class UsuariosServices {
         var usuario = this.repository.findByEmail(vo.email()).orElseThrow(() -> new NegocioException("Usuário não localizado"));
 
         if (this.passwordEncoder.matches(vo.senha(), usuario.getSenha())) {
-            var tokenJwt = this.jwtService.generateToken(usuario.getEmail(), PerfisEnum.ADMIN, 1L);
+            var tokenJwt = this.service.generateToken(usuario.getEmail(), PerfisEnum.ADMIN, 1L);
             return new TokenResponseVO(tokenJwt);
         } else {
             throw new NegocioException("Credenciais incorrtetas. Por favor informe novamente");
+        }
+    }
+
+    public void autorizar(String bearerToken) {
+        if (Objects.nonNull(bearerToken) && !bearerToken.isEmpty() && !bearerToken.isBlank()) {
+            var token = bearerToken.substring(7);
+            this.service.validateToken(token);
+        } else {
+            throw new NegocioException("Token inválido");
         }
     }
 }

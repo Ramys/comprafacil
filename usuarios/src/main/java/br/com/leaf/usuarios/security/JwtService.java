@@ -4,9 +4,6 @@ import br.com.leaf.usuarios.enums.PerfisEnum;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.auth0.jwt.interfaces.JWTVerifier;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +17,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.UnsupportedEncodingException;
 import java.security.Key;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,6 +31,7 @@ public class JwtService {
     private String SECRET;
 
     private final UserDetailsService userDetailsService;
+    private final DateTimeProvider dateTimeProvider;
 
     public boolean validateToken(String token) {
         try {
@@ -45,7 +44,7 @@ public class JwtService {
     }
 
     private DecodedJWT getDecodedJWT(String token) throws UnsupportedEncodingException {
-        final JWTVerifier require = JWT.require(Algorithm.HMAC256(SECRET))
+        var require = JWT.require(Algorithm.HMAC256(SECRET))
                 .acceptExpiresAt(0)
                 .build();
         require.verify(token);
@@ -65,12 +64,14 @@ public class JwtService {
     }
 
     private String createToken(Map<String, Object> claims, String email) {
-        return Jwts.builder()
-                .setClaims(claims)
-                .setSubject(email)
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 30))
-                .signWith(getSignKey(), SignatureAlgorithm.HS256).compact();
+        final LocalDateTime localDateTime = this.dateTimeProvider.dateTime();
+        final Date now = this.dateTimeProvider.toDate(localDateTime);
+        return JWT.create()
+                .withSubject(email)
+//                .withArrayClaim("roles", roles.toArray(new String[roles.size()]))
+                .withIssuedAt(now)
+//                .withClaim("clientName", client.getName())
+                .sign(Algorithm.HMAC256(SECRET));
     }
 
     private Key getSignKey() {

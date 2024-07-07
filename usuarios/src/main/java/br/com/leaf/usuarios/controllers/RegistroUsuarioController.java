@@ -1,5 +1,6 @@
 package br.com.leaf.usuarios.controllers;
 
+import br.com.leaf.usuarios.exceptions.NegocioException;
 import br.com.leaf.usuarios.services.UsuariosServices;
 import br.com.leaf.usuarios.vos.LoginVO;
 import br.com.leaf.usuarios.vos.RegistroVO;
@@ -12,15 +13,17 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.UUID;
+
+import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
 @RestController
 @RequiredArgsConstructor
@@ -64,15 +67,13 @@ public class RegistroUsuarioController {
     @PostMapping("/autorizar")
     @Operation(summary = "O serviço de autorização controla o acesso dos usuários a diferentes partes e funcionalidades" +
             " do sistema, com base em suas permissões e roles (ex.: usuário comum, administrador).")
-    public String autorizar() {
-        return "oi";
-    }
-
-    @GetMapping("/teste")
-    @Operation(summary = "O serviço de autorização controla o acesso dos usuários a diferentes partes e funcionalidades" +
-            " do sistema, com base em suas permissões e roles (ex.: usuário comum, administrador).")
-    public String teste() {
-        return "oi";
+    public ResponseEntity<String> autorizar(@RequestHeader(AUTHORIZATION) String token) {
+        try {
+            this.service.autorizar(token);
+            return ResponseEntity.ok("Usuário autenticado");
+        } catch (NegocioException e) {
+            return ResponseEntity.status(401).body("Credenciais inválida");
+        }
     }
 
 }
