@@ -11,6 +11,17 @@
     </parent>
 
     <name>comprafacil</name>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <groupId>br.com.leaf</groupId>
     <artifactId>comprafacil</artifactId>
     <version>1.0.0-SNAPSHOT</version>
@@ -27,13 +38,16 @@
     <!-- Módulos da aplicação -->
     <modules>
         <module>config-server</module>
-        <module>usuarios</module>
         <module>eureka-server</module>
         <module>api-gateway</module>
+
+        <module>usuarios</module>
+        <module>gestao</module>
     </modules>
 
     <properties>
         <java.version>21</java.version>
+        <spring-cloud.version>2023.0.2</spring-cloud.version>
     </properties>
 
     <dependencies>
@@ -46,6 +60,19 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-docker-compose</artifactId>
+            <scope>runtime</scope>
         </dependency>
     </dependencies>
 

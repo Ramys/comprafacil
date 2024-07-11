@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: gestao
+
+  config:
+    import: configserver:http://localhost:8888
+
+  cloud:
+    config:
+      name: gestao
+
+  docker:
+    compose:
+      file: ./gestao/docker-compose.yaml
+
+  datasource:
+    url: jdbc:postgresql://localhost:5435/comprafacil?createDatabaseIfNotExist=true
+    driver-class-name: org.postgresql.Driver
+    username: root
+    password: root
+    hikari:
+      schema: ${spring.application.name}
+  liquibase:
+    change-log: db/changelog/changelog-master.xml
+
+server:
+  port: 0
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
