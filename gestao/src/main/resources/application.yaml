@@ -14,12 +14,12 @@ spring:
       file: ./gestao/docker-compose.yaml
 
   datasource:
-    url: jdbc:postgresql://localhost:5435/comprafacil?createDatabaseIfNotExist=true
-    driver-class-name: org.postgresql.Driver
-    username: root
-    password: root
+    url:
+    driver-class-name:
+    username:
+    password:
     hikari:
-      schema: ${spring.application.name}
+      schema: gestao
   liquibase:
     change-log: db/changelog/changelog-master.xml
 
