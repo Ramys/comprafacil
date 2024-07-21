@@ -10,28 +10,25 @@ import java.util.function.Predicate;
 @Component
 public class RouteValidator {
 
+    public static final List<String> openApiEndpoints = List.of("/cadastro-usuario/registrar-usuarios",
+                                                                "/cadastro-usuario/logar",
+                                                                "/eureka");
+
+    public Predicate<ServerHttpRequest> isSecured = request -> openApiEndpoints
+                                                                            .stream()
+                                                                            .noneMatch(uri -> request.getURI().getPath().contains(uri));
+
     public String getRequiredRole(ServerHttpRequest request) {
         String path = request.getPath().toString();
 
-        if (request.getMethod() == HttpMethod.POST && path.startsWith("/products")) {
+        if (request.getMethod() == HttpMethod.POST && path.startsWith("/gestao")) {
             return "ADMIN";
-        } else if (request.getMethod() == HttpMethod.PUT && path.matches("/products/\\d+")) {
+        } else if (request.getMethod() == HttpMethod.PUT && path.matches("/gestao/\\d+")) {
             return "ADMIN";
-        } else if (request.getMethod() == HttpMethod.DELETE && path.matches("/products/\\d+")) {
+        } else if (request.getMethod() == HttpMethod.DELETE && path.matches("/gestao/\\d+")) {
             return "ADMIN";
         }
-
         return null;
     }
-
-    public static final List<String> openApiEndpoints = List.of(
-            "/auth/register",
-            "/auth/login",
-            "/eureka"
-    );
-
-    public Predicate<ServerHttpRequest> isSecured = request -> openApiEndpoints.stream()
-            .noneMatch(uri -> request.getURI().getPath().contains(uri));
-
 
 }

@@ -4,7 +4,6 @@ import br.com.leaf.apigateway.exceptions.UnauthorizedException;
 import br.com.leaf.apigateway.filter.RouteValidator;
 import br.com.leaf.apigateway.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.http.HttpStatus;
@@ -12,17 +11,12 @@ import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class AuthenticationFilter extends AbstractGatewayFilterFactory<AuthenticationFilter.Config> {
 
     private final RouteValidator routeValidator;
 
     private final JwtUtil jwtUtil;
-
-    public AuthenticationFilter(JwtUtil jwtUtil, RouteValidator routeValidator) {
-        super(Config.class);
-        this.jwtUtil = jwtUtil;
-        this.routeValidator = routeValidator;
-    }
 
     @Override
     public GatewayFilter apply(Config config) {
