@@ -1,30 +1,31 @@
-<h1 align="center" style="font-family: Arial, sans-serif; color: #FFFF00;">
-  Compra Fácil
-</h1>
+# Compra Fácil
 
-<p align="center">
-  <img src="images/img.png" style="width: 50px; height: auto;" alt="Símbolo de em construção"/> <br />
-<span style="font-family: Arial, sans-serif; color: #FF0000;">Em construção</span>
-</p>
+## Sumário
+1. [Introdução](#introdução)
+2. [Objetivo](#objetivo)
+3. [Funcionalidades Principais](#funcionalidades-principais)
+    - [Login e Registro de Usuário](#login-e-registro-de-usuário)
+    - [Gestão de Itens](#gestão-de-itens)
+    - [Carrinho de Compras](#carrinho-de-compras)
+    - [Pagamentos (Simulação)](#pagamentos-simulação)
+4. [Instalação](#instalação)
+5. [Subindo os Serviços](#subindo-os-serviços)
+6. [Notas Importantes](#notas-importantes)
+7. [Contribuição](#contribuição)
+8. [Licença](#licença)
 
-O "Compra Fácil" é um software inovador de gerenciamento de carrinho de compras e gestão, projetado para oferecer uma
-experiência de compra eficiente e intuitiva. Este sistema é ideal para lojas online, supermercados e qualquer
-estabelecimento que necessite de uma solução robusta para facilitar o processo de compras dos seus clientes.
+## Introdução
+O "Compra Fácil" é um software inovador de gerenciamento de carrinho de compras e gestão, projetado para oferecer uma experiência de compra eficiente e intuitiva. Este sistema é ideal para lojas online, supermercados e qualquer estabelecimento que necessite de uma solução robusta para facilitar o processo de compras dos seus clientes.
 
 ## Objetivo
-
-O objetivo do "Compra Fácil" é simplificar o processo de compras para os clientes, ao mesmo tempo em que oferece aos
-gestores ferramentas poderosas para controlar e otimizar as operações de vendas e estoque.
+O objetivo do "Compra Fácil" é simplificar o processo de compras para os clientes, ao mesmo tempo em que oferece aos gestores ferramentas poderosas para controlar e otimizar as operações de vendas e estoque.
 
 ## Funcionalidades Principais
 
-### 1. Login e Registro de Usuário
-
-**Descrição:** Os usuários devem ser capazes de se cadastrar e fazer login no sistema usando as ferramentas do Spring
-Security para autenticação e autorização.
+### Login e Registro de Usuário
+Os usuários devem ser capazes de se cadastrar e fazer login no sistema usando as ferramentas do Spring Security para autenticação e autorização.
 
 **Funcionalidades:**
-
 - **Registro de Usuário:**
     - Formulário de registro contendo campos como nome, email, senha e confirmação de senha.
     - Validação dos dados do usuário no lado do cliente e no servidor.
@@ -34,51 +35,41 @@ Security para autenticação e autorização.
     - Autenticação de usuário usando Spring Security.
     - Gestão de sessões de usuário utilizando tokens do Spring Security.
 - **Autorização:**
-    - Controle de acesso a diferentes partes do sistema com base nas permissões do usuário (usuário comum,
-      administrador).
+    - Controle de acesso a diferentes partes do sistema com base nas permissões do usuário (usuário comum, administrador).
     - Middleware de verificação de permissões antes de permitir o acesso a rotas protegidas.
 
-### 2. Gestão de Itens
-
-**Descrição:** Os usuários administradores terão acesso a uma tela de gestão de itens, permitindo o controle do cadastro
-e manutenção de itens, bem como seus preços.
+### Gestão de Itens
+Os usuários administradores terão acesso a uma tela de gestão de itens, permitindo o controle do cadastro e manutenção de itens, bem como seus preços.
 
 **Funcionalidades:**
-
-- **Listagem de Itens:** (Todos)
+- **Listagem de Itens:**
     - Exibição de uma tabela/lista de itens cadastrados com informações básicas (nome, descrição, preço).
-- **Cadastro de Novo Item:** (Administrador)
-    - API para adicionar um novo item, incluindo campos como nome, descrição, categoria, preço, URL da imagem e
-      quantidade.
+- **Cadastro de Novo Item:**
+    - API para adicionar um novo item, incluindo campos como nome, descrição, categoria, preço, URL da imagem e quantidade.
     - Validação para saber se o usuário tem permissão de fazer essa função.
-- **Edição de Item:** (Administrador)
+- **Edição de Item:**
     - Opção para editar informações de um item existente.
     - Atualização dos dados no banco de dados.
     - Validação para saber se o usuário tem permissão de fazer essa função.
-- **Remoção de Item:** (Administrador)
+- **Remoção de Item:**
     - Função para remover itens do sistema.
     - Validação para saber se o usuário tem permissão de fazer essa função.
 
-### 3. Carrinho de Compras
-
-**Descrição:** Os usuários podem adicionar e remover itens do carrinho de compras. O carrinho de compras deve ser
-persistente e associado ao usuário logado.
-
-**Funcionalidades:** (Usuário Comum)
-
-- **Adição de Itens ao Carrinho:** (Usuário Comum)
-    - Adicionar um item e quantidade a um carrinho.
-- **Remoção de Itens do Carrinho:** (Usuário Comum)
-    - Remoção de um item e de sua quantidade.
-- **Visualização do Carrinho:** (Usuário Comum)
-    - Consulta que lista de itens no carrinho do cliente.
-
-### 4. Pagamentos (Simulação)
-
-**Descrição:** Implementar um serviço que vai chamar uma API de pagamento passando um carrinho.
+### Carrinho de Compras
+Os usuários podem adicionar e remover itens do carrinho de compras. O carrinho de compras deve ser persistente e associado ao usuário logado.
 
 **Funcionalidades:**
+- **Adição de Itens ao Carrinho:**
+    - Adicionar um item e quantidade a um carrinho.
+- **Remoção de Itens do Carrinho:**
+    - Remoção de um item e de sua quantidade.
+- **Visualização do Carrinho:**
+    - Consulta que lista de itens no carrinho do cliente.
 
+### Pagamentos (Simulação)
+Implementar um serviço que vai chamar uma API de pagamento passando um carrinho.
+
+**Funcionalidades:**
 - **Resumo do Carrinho:**
     - Listar todos os itens do carrinho.
     - Colocar no final um resumo de quantidade de itens e soma de valores.
@@ -86,40 +77,35 @@ persistente e associado ao usuário logado.
     - Envia para um endpoint mockado lista de itens, custo total e o tipo de pagamento (Cartão, Boleto, Débito, Pix).
     - O endpoint mockado vai sempre retornar "pagamento realizado com sucesso".
 
-## Rodando o Projeto Localmente
-
-### Pré-requisitos
-
-- [Git](https://git-scm.com/)
-- [IntelliJ IDEA](https://www.jetbrains.com/idea/)
-- [JDK 21](https://www.oracle.com/java/technologies/downloads/#java21)
-- [Maven](https://maven.apache.org/)
-- Banco de dados configurado com schemas `usuarios` e `gestao`
-
-### Passos para Configuração Localmente
-
+## Instalação
 1. Clone o repositório:
-   ```sh
-   git clone https://github.com/rafaelteixeirarnnt/comprafacil.git
-   ```
-2.	Importe o projeto no IntelliJ:
-* File > New > Project from Existing Sources...
-* Selecione a pasta comprafacil
-* Escolha Import project from external model e selecione Maven. Clique em Next.
+    ```sh
+    git clone https://github.com/rafaelteixeirarnnt/comprafacil.git
+    ```
+2. Navegue até o diretório do projeto:
+    ```sh
+    cd comprafacil
+    ```
 
-3.	Configure o Maven:
-	File > Settings > Build, Execution, Deployment > Build Tools > Maven.
+## Subindo os Serviços
+1. Compile o projeto usando Maven:
+    ```sh
+    mvn clean install
+    ```
+2. Configure as variáveis de ambiente e crie as configurações de execução para cada módulo (Config-server, Eureka-server, Api-gateway, Usuarios, Gestao).
 
-4.	Configure as variáveis de ambiente e crie as configurações de execução para cada módulo (Config-server, Eureka-server, Api-gateway, Usuarios, Gestao).
+3. Inicie os módulos na seguinte ordem:
+    * 1 - Config-server
+    * 2 - Eureka-server - [URL](http://localhost:8761/)
+    * 3 - Api-gateway -
+    * 4 - Usuarios - [Swagger](http://localhost:8080/usuarios/swagger-ui/index.html)
 
-5. Inicie os módulos na seguinte ordem:
-   * 1 - Config-server
-   * 2 - Eureka-server - [URL](http://localhost:8761/)
-   * 3 - Api-gateway - 
-   * 4 - Usuarios - [Swagger](http://localhost:8080/usuarios/swagger-ui/index.html)
+## Notas Importantes
+- Após subir todos os serviços, aguarde alguns segundos para que todos os serviços estejam completamente operacionais e registrados no Eureka Server.
+- Certifique-se de que todos os serviços estão rodando corretamente no Docker antes de iniciar o uso.
 
-Observações
+## Contribuição
+Sinta-se à vontade para contribuir com o projeto. Faça um fork do repositório e envie pull requests com suas melhorias.
 
-* Certifique-se de que o banco de dados está rodando e configurado corretamente.
-* Verifique as configurações de cada módulo para garantir que as variáveis de ambiente e as propriedades do Maven estão corretas.
-* Espere alguns minutos para chamar o serviço do swagger
+## Licença
+Este projeto está licenciado sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
