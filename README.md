@@ -85,3 +85,41 @@ persistente e associado ao usuário logado.
 - **Simulação de Transação:**
     - Envia para um endpoint mockado lista de itens, custo total e o tipo de pagamento (Cartão, Boleto, Débito, Pix).
     - O endpoint mockado vai sempre retornar "pagamento realizado com sucesso".
+
+## Rodando o Projeto Localmente
+
+### Pré-requisitos
+
+- [Git](https://git-scm.com/)
+- [IntelliJ IDEA](https://www.jetbrains.com/idea/)
+- [JDK 21](https://www.oracle.com/java/technologies/downloads/#java21)
+- [Maven](https://maven.apache.org/)
+- Banco de dados configurado com schemas `usuarios` e `gestao`
+
+### Passos para Configuração Localmente
+
+1. Clone o repositório:
+   ```sh
+   git clone https://github.com/rafaelteixeirarnnt/comprafacil.git
+   ```
+2.	Importe o projeto no IntelliJ:
+* File > New > Project from Existing Sources...
+* Selecione a pasta comprafacil
+* Escolha Import project from external model e selecione Maven. Clique em Next.
+
+3.	Configure o Maven:
+	File > Settings > Build, Execution, Deployment > Build Tools > Maven.
+
+4.	Configure as variáveis de ambiente e crie as configurações de execução para cada módulo (Config-server, Eureka-server, Api-gateway, Usuarios, Gestao).
+
+5. Inicie os módulos na seguinte ordem:
+   * 1 - Config-server
+   * 2 - Eureka-server - [URL](http://localhost:8761/)
+   * 3 - Api-gateway - 
+   * 4 - Usuarios - [Swagger](http://localhost:8080/usuarios/swagger-ui/index.html)
+
+Observações
+
+* Certifique-se de que o banco de dados está rodando e configurado corretamente.
+* Verifique as configurações de cada módulo para garantir que as variáveis de ambiente e as propriedades do Maven estão corretas.
+* Espere alguns minutos para chamar o serviço do swagger
